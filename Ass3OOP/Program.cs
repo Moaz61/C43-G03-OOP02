@@ -65,7 +65,81 @@
 
     }
 
+    #region 5-Design a program for a library management system where
 
+    /// in this example, inheritance simplifies the design, as it prevents us from code redundancy.
+    ///so, in our example we have three classes (book, ebook and printed book),
+    /// since we used inheritance, i didn't have to write the basic attributes for ebook and printed book(title, author, isavailable, isbn) because they all inherit from the base class (book)
+    /// so, i can add the special attributes for each class (filesize and page count)
+    /// also inheritance allowed us (with the use of abstraction) to ensure that every child class contains some functions as (display), and it also forces us to implement this function according to the class
+
+    public abstract class Book
+    {
+
+        public string Title { get; private protected set; }
+        public string Author { get; private protected set; }
+        public bool IsAvailable { get; private protected set; }
+        public string ISBN { get; private protected set; }
+
+        protected Book(string title, string author, string isbn)
+        {
+            Title = title;
+            Author = author;
+            ISBN = isbn;
+            IsAvailable = true;
+        }
+
+        public abstract void Display();
+
+    }
+
+    public class Ebook : Book
+    {
+        private double fileSize;
+
+        public double FileSize { get; protected set; }
+
+        public Ebook(String title, string author, string isbn, double fileSize) : base(title, author, isbn)
+        {
+            FileSize = fileSize;
+        }
+
+        public override void Display()
+        {
+            Console.WriteLine($"title: {Title}");
+            Console.WriteLine($"author: {Author}");
+            Console.WriteLine($"isbn: {ISBN}");
+            Console.WriteLine($"Available: {(IsAvailable ? "Yes" : "No")}");
+            Console.WriteLine($"File Size: {FileSize} MB");
+        }
+
+    }
+
+
+    public class PrintedBook : Book
+    {
+        private int pageCount;
+
+        public int PageCount { get; protected set; }
+
+        public PrintedBook(string title, string author, string isbn, int pageCount) : base(title, author, isbn)
+        {
+            PageCount = pageCount;
+        }
+
+
+        public override void Display()
+        {
+            Console.WriteLine($"title: {Title}");
+            Console.WriteLine($"author: {Author}");
+            Console.WriteLine($"isbn: {ISBN}");
+            Console.WriteLine($"Available: {(IsAvailable ? "Yes" : "No")}");
+            Console.WriteLine($"page count: {PageCount} MB");
+        }
+
+
+    }
+    #endregion
 
 
 
